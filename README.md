@@ -52,7 +52,7 @@ cd your-repo
 
 Install dependencies
 
-npm install
+## npm install
 
 
 Setup database connection
@@ -61,45 +61,45 @@ Update your database settings in data-source.ts (PostgreSQL).
 Configure environment variables
 Create a .env file in the root directory and add:
 
-PORT=3000
-JWT_SECRET=your-secret-key
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=your-db-user
-DB_PASS=your-db-password
-DB_NAME=your-db-name
+### PORT=3000
+### JWT_SECRET=your-secret-key
+### DB_HOST=localhost
+### DB_PORT=5432
+### DB_USER=your-db-user
+### DB_PASS=your-db-password
+### DB_NAME=your-db-name
 
 
 Run database migrations
 
-npm run typeorm migration:run
+## npm run typeorm migration:run
 
 
-Start the project
+# Start the project
 
-npm start
+## npm start
 
 🧪 Scripts
 
-npm run dev → Run in development with hot reload
+## npm run dev → Run in development with hot reload
 
-npm run build → Build project
+## npm run build → Build project
 
-npm start → Start compiled project
+## npm start → Start compiled project
 
-npm run typeorm → Run TypeORM CLI commands
+## npm run typeorm → Run TypeORM CLI commands
 
 📖 API Documentation
 
 Example routes:
 
-POST /auth/register → Create a new user
+## POST /auth/register → Create a new user
 
-POST /auth/login → Login and receive JWT
+## POST /auth/login → Login and receive JWT
 
-GET /products → List all products (requires role)
+## GET /products → List all products (requires role)
 
-POST /products → Create product (admin only)
+## POST /products → Create product (admin only)
 
 🎯 Goals
 
