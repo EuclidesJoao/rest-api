@@ -1,4 +1,4 @@
-📦 Awesome Project – Built with TypeORM
+# 📦 Awesome Project – Built with TypeORM
 
 A RESTful API built with TypeScript, Express.js, PostgreSQL, and TypeORM, following a Domain-Driven Design (DDD) approach.
 Includes JWT authentication, role-based authorization, and data caching for better performance and security.
