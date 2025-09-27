@@ -1,4 +1,4 @@
-# 📦 Awesome Project – Built with TypeORM
+# 📦 RESTful APIs – Built with Node.JS, Express.JS, Postgres, PM2, JWT, BCrypt, TypeORM, and DDD (Domain Driven Design) aproach
 
 A RESTful API built with TypeScript, Express.js, PostgreSQL, and TypeORM, following a Domain-Driven Design (DDD) approach.
 Includes JWT authentication, role-based authorization, data caching, and PM2 (used in development for process management).
