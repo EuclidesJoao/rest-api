@@ -1,9 +1,9 @@
 # 📦 Awesome Project – Built with TypeORM
 
 A RESTful API built with TypeScript, Express.js, PostgreSQL, and TypeORM, following a Domain-Driven Design (DDD) approach.
-Includes JWT authentication, role-based authorization, and data caching for better performance and security.
+Includes JWT authentication, role-based authorization, data caching, and PM2 (used in development for process management).
 
-🚀 Features
+## 🚀 Features
 
 ✅ User registration & authentication with JWT
 
@@ -19,7 +19,9 @@ Includes JWT authentication, role-based authorization, and data caching for bett
 
 ✅ Clean architecture with DDD principles
 
-🛠️ Tech Stack
+✅ PM2 (used in development to simulate production process management)
+
+## 🛠️ Tech Stack
 
 TypeScript – strongly typed language for scalable applications
 
@@ -33,7 +35,9 @@ JWT – secure authentication
 
 DDD – for modular and maintainable code
 
-📂 Project Structure
+PM2 – used in development for process management and monitoring
+
+## 📂 Project Structure
 src/
  ├── domain/         # Entities, value objects, and domain logic
  ├── infrastructure/ # Database, TypeORM config, repositories
@@ -42,7 +46,7 @@ src/
  ├── config/         # Environment & app configuration
  └── index.ts        # Application entry point
 
-⚙️ Installation & Setup
+## ⚙️ Installation & Setup
 
 Clone the repository
 
@@ -52,7 +56,7 @@ cd your-repo
 
 Install dependencies
 
-## npm install
+###### npm install
 
 
 Setup database connection
@@ -61,47 +65,54 @@ Update your database settings in data-source.ts (PostgreSQL).
 Configure environment variables
 Create a .env file in the root directory and add:
 
-### PORT=3000
-### JWT_SECRET=your-secret-key
-### DB_HOST=localhost
-### DB_PORT=5432
-### DB_USER=your-db-user
-### DB_PASS=your-db-password
-### DB_NAME=your-db-name
+##### PORT=3000
+##### JWT_SECRET=your-secret-key
+##### DB_HOST=localhost
+##### DB_PORT=5432
+##### DB_USER=your-db-user
+##### DB_PASS=your-db-password
+##### DB_NAME=your-db-name
 
 
 Run database migrations
 
-## npm run typeorm migration:run
+##### npm run typeorm migration:run
 
 
-# Start the project
+Start the project (development)
 
-## npm start
+##### npm run dev
 
-🧪 Scripts
 
-## npm run dev → Run in development with hot reload
+Optional: Run with PM2 (development only)
 
-## npm run build → Build project
+##### pm2 start dist/index.js --name "awesome-api-dev"
+##### pm2 status
+##### pm2 logs awesome-api-dev
 
-## npm start → Start compiled project
+## 🧪 Scripts
 
-## npm run typeorm → Run TypeORM CLI commands
+##### npm run dev → Run in development with hot reload
 
-📖 API Documentation
+##### npm run build → Build project
+
+##### npm start → Start compiled project
+
+##### npm run typeorm → Run TypeORM CLI commands
+
+## 📖 API Documentation
 
 Example routes:
 
-## POST /auth/register → Create a new user
+##### POST /auth/register → Create a new user
 
-## POST /auth/login → Login and receive JWT
+##### POST /auth/login → Login and receive JWT
 
-## GET /products → List all products (requires role)
+##### GET /products → List all products (requires role)
 
-## POST /products → Create product (admin only)
+##### POST /products → Create product (admin only)
 
-🎯 Goals
+## 🎯 Goals
 
 This project is mainly for practice and learning:
 
@@ -111,4 +122,18 @@ Applying Domain-Driven Design in real-world scenarios
 
 Building secure, scalable, and clean REST APIs
 
-🔗 Feel free to fork, use, and give feedback!
+Practicing process management with PM2 in development
+
+### 🔮 Future Improvements
+
+### 🧪 Automated Tests → Add unit and integration tests (e.g., with Jest or Mocha/Chai)
+
+### 🐳 Dockerization → Containerize the API and database for easier deployment
+
+### 🔄 CI/CD Pipeline → Configure GitHub Actions or GitLab CI for automated builds, testing, and deployment
+
+### 📑 API Documentation → Add Swagger/OpenAPI for interactive API docs
+
+### 📈 Monitoring & Logging → Integrate tools like Winston, ELK stack, or Prometheus
+
+### 🔗 Feel free to fork, use, and give feedback!
