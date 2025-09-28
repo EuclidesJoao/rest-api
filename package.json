@@ -2,7 +2,7 @@
    "name": "rest-api",
    "version": "0.0.1",
    "description": "Awesome project developed with TypeORM.",
-   "type": "commonjs",
+   "type": "module",
    "devDependencies": {
       "@types/bcrypt": "^6.0.0",
       "@types/express": "^5.0.3",
@@ -13,6 +13,7 @@
       "typescript": "^5.8.2"
    },
    "dependencies": {
+      "@types/cors": "^2.8.19",
       "bcrypt": "^6.0.0",
       "concurrently": "^9.2.1",
       "cors": "^2.8.5",
@@ -26,8 +27,9 @@
       "typeorm": "0.3.27"
    },
    "scripts": {
+      "watch": "tsc watch",
       "start": "pm2 dist/index.ts",
-      "dev": "pm2-dev dest/index.js --watch",
+      "dev": "pm2-dev src/index.js --watch",
       "typeorm": "typeorm-ts-node-commonjs"
    }
 }
