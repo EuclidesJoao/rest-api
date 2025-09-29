@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const { NODE_ENV } = process.env;
-const SERVER_NAME = 'Library REST API';
+const SERVER_NAME = 'RESTful API';
 const PROD = ["PROD", "PRODUCTION"];
 const DEV = ["DEV", "DEVELOPMENT"];
 const TEST = ["TEST"];
@@ -60,7 +60,10 @@ const selectedEnvironmentConfiguration = getEnvironmentConfiguration();
 
 const configuration ={
     server:{
-        name: SERVER_NAME
+        name: SERVER_NAME,
+        version: getStringFromEnvironment('API_VERSION'),
+        port: getNumberFromEnvironment('SERVER_PORT'),
+        docsPath: getStringFromEnvironment('DOCUMENTATION_PATH')
     },
     ...selectedEnvironmentConfiguration
 }

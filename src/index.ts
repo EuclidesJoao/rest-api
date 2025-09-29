@@ -1,20 +1,17 @@
-import { AppDataSource } from "./infrastructure/database/data-source"
-import { User } from "./entity/User"
+import app from "./app";
+import dotenv from "dotenv";
+import { AppDataSource } from "./infrastructure/database/data-source";
+import open from "open";
+
+dotenv.config();
 
 AppDataSource.initialize().then(async () => {
+  const port = process.env.PORT || 3000;
 
-    console.log("Inserting a new user into the database...")
-    const user = new User()
-    user.firstName = "Timber"
-    user.lastName = "Saw"
-    user.age = 25
-    await AppDataSource.manager.save(user)
-    console.log("Saved a new user with id: " + user.id)
-
-    console.log("Loading users from the database...")
-    const users = await AppDataSource.manager.find(User)
-    console.log("Loaded users: ", users)
-
-    console.log("Here you can setup and run express / fastify / any other framework.")
-
-}).catch(error => console.log(error))
+  app.listen(port, () => {
+    const docsUrl = `http://localhost:${port}/api-docs`;
+    console.log(`🚀 Server is running on port: ${port}`);
+    console.log(`📖 API Docs available at: ${docsUrl}`);
+    //open(docsUrl);
+  });
+});

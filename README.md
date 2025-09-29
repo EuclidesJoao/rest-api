@@ -1,139 +1,243 @@
-# 📦 RESTful APIs – Built with Node.JS, Express.JS, Postgres, PM2, JWT, BCrypt, TypeORM, and DDD (Domain Driven Design) aproach
+🚀 Enterprise-Grade RESTful API - Node.js, TypeScript & Domain-Driven Design
+A production-ready RESTful API built with Node.js, Express, TypeScript, and PostgreSQL, following Domain-Driven Design (DDD) principles. This project demonstrates modern backend development practices with enterprise-level architecture, security, and scalability.
 
-A RESTful API built with TypeScript, Express.js, PostgreSQL, and TypeORM, following a Domain-Driven Design (DDD) approach.
-Includes JWT authentication, role-based authorization, data caching, and PM2 (used in development for process management).
+💡 Project Overview
+This API serves as a robust foundation for building scalable web applications, featuring secure authentication, role-based access control, and clean architecture patterns. Ideal for developers looking to understand enterprise-level backend development with TypeScript.
 
-## 🚀 Features
+✨ Key Features
+🔐 Security & Authentication
+JWT-based Authentication with secure token management
 
-✅ User registration & authentication with JWT
+Role-Based Access Control (RBAC) - Admin, Manager, User roles
 
-✅ Role-based authorization (Admin, Manager, User)
+BCrypt password hashing for enhanced security
 
-✅ Product management (CRUD operations)
+Input validation and comprehensive error handling
 
-✅ Database migrations & seeding with TypeORM
+🏗️ Architecture & Design
+Domain-Driven Design (DDD) for maintainable, scalable code
 
-✅ Data caching for frequent queries
+Clean Architecture with separation of concerns
 
-✅ Input validation & error handling
+TypeScript for type safety and better developer experience
 
-✅ Clean architecture with DDD principles
+Modular structure following industry best practices
 
-✅ PM2 (used in development to simulate production process management)
+🗄️ Database & ORM
+PostgreSQL with TypeORM for robust data management
 
-## 🛠️ Tech Stack
+Database migrations and seeding capabilities
 
-TypeScript – strongly typed language for scalable applications
+Repository pattern for data access abstraction
 
-Express.js – fast, unopinionated, and minimalist web framework
+Environment-specific configurations
 
-PostgreSQL – robust relational database
+🛠️ Development & Operations
+PM2 process management for development and production
 
-TypeORM – TypeScript ORM for database modeling and queries
+Swagger/OpenAPI documentation
 
-JWT – secure authentication
+Hot reload in development environment
 
-DDD – for modular and maintainable code
+Comprehensive logging and monitoring readiness
 
-PM2 – used in development for process management and monitoring
-
-## 📂 Project Structure
+🏛️ Architecture & Project Structure
+text
 src/
- ├── domain/         # Entities, value objects, and domain logic
- ├── infrastructure/ # Database, TypeORM config, repositories
- ├── application/    # Use cases, services
- ├── presentation/   # Controllers, routes, middlewares
- ├── config/         # Environment & app configuration
- └── index.ts        # Application entry point
+├── base/                          # Foundation layer
+│   ├── interfaces/                # Contract definitions
+│   │   ├── IController.ts         # Controller interface
+│   │   └── IService.ts            # Service interface
+│   └── middlewares/               # Cross-cutting concerns
+│       ├── data-submission-handler.ts
+│       ├── error-handler.ts
+│       └── id-param-handler.ts
+│
+├── domain/                        # Business logic layer
+│   └── entities/                  # Domain models
+│       ├── user-roles.entity.ts   # Role management
+│       └── user.entity.ts         # User domain entity
+│
+├── infrastructure/                # External concerns layer
+│   └── database/
+│       └── data-source.ts         # Database configuration
+│
+├── presentation/                  # Delivery mechanism layer
+│   └── user/
+│       ├── controllers/           # Request handlers
+│       │   ├── auth.controller.ts
+│       │   ├── user-role.controller.ts
+│       │   └── user.controller.ts
+│       ├── services/              # Business logic
+│       │   ├── auth.service.ts
+│       │   ├── user-role.service.ts
+│       │   └── user.service.ts
+│       ├── routes/                # API endpoints
+│       │   ├── auth.route.ts
+│       │   ├── user-role.route.ts
+│       │   └── user.route.ts
+│       └── index.ts               # Module exports
+│
+├── config/                        # Configuration layer
+│   └── swagger/                   # API documentation
+├── app.ts                         # Application setup
+└── index.ts                       # Entry point
+🚀 Quick Start
+Prerequisites
+Node.js 16+
 
-## ⚙️ Installation & Setup
+PostgreSQL 12+
 
+npm or yarn
+
+Installation & Setup
 Clone the repository
 
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
-
-
+bash
+git clone https://github.com/EuclidesJoao/rest-api.git
+cd rest-api
 Install dependencies
 
-###### npm install
+bash
+npm install
+Environment Configuration
+Create a .env file with the following variables:
 
+env
+# Application
+API_VERSION=1.0.0
+DOCUMENTATION_PATH=/api-docs
+PORT=3247
+NODE_ENV=development
 
-Setup database connection
-Update your database settings in data-source.ts (PostgreSQL).
+# Database (Development)
+DB_USERNAME_DEV=postgres
+DB_PASSWORD_DEV=postgres
+DB_NAME_DEV=rest_api
+DB_HOST_DEV=localhost
+DB_PORT_DEV=5432
 
-Configure environment variables
-Create a .env file in the root directory and add:
+# JWT Configuration
+JWT_SECRET=supersecretjwtkey_dev
+JWT_EXPIRES_IN=1d
 
-##### PORT=3000
-##### JWT_SECRET=your-secret-key
-##### DB_HOST=localhost
-##### DB_PORT=5432
-##### DB_USER=your-db-user
-##### DB_PASS=your-db-password
-##### DB_NAME=your-db-name
+# CORS
+CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+Database Setup
 
+bash
+# Ensure PostgreSQL is running
+createdb rest_api
 
-Run database migrations
+# Run database migrations
+npm run typeorm migration:run
+Start Development Server
 
-##### npm run typeorm migration:run
+bash
+# Build the project
+npm run watch
 
+# Start development server with hot reload
+npm run dev
+📚 API Documentation
+Once running, access the Swagger documentation at:
+http://localhost:3247/api-docs
 
-Start the project (development)
+Key Endpoints
+Authentication
+POST /auth/register - User registration
 
-##### npm run dev
+POST /auth/login - User authentication
 
+User Management
+GET /users - List users (role-based access)
 
-Optional: Run with PM2 (development only)
+POST /users - Create user (admin only)
 
-##### pm2 start dist/index.js --name "awesome-api-dev"
-##### pm2 status
-##### pm2 logs awesome-api-dev
+GET /users/:id - Get user by ID
 
-## 🧪 Scripts
+Role Management
+GET /user-roles - Manage user roles
 
-##### npm run dev → Run in development with hot reload
+🛠️ Available Scripts
+bash
+npm run watch      # Build project with watch mode
+npm run dev        # Start development server with hot reload
+npm run build      # Build for production
+npm start          # Start production server
+🎯 Learning Objectives
+This project demonstrates:
 
-##### npm run build → Build project
+Domain-Driven Design implementation in TypeScript
 
-##### npm start → Start compiled project
+Enterprise-grade security practices
 
-##### npm run typeorm → Run TypeORM CLI commands
+Clean Architecture principles
 
-## 📖 API Documentation
+Database management with TypeORM and migrations
 
-Example routes:
+RESTful API design best practices
 
-##### POST /auth/register → Create a new user
+Production-ready configuration and tooling
 
-##### POST /auth/login → Login and receive JWT
+🔮 Roadmap & Future Enhancements
+🧪 Testing
+Unit & integration tests with Jest
 
-##### GET /products → List all products (requires role)
+End-to-end testing suite
 
-##### POST /products → Create product (admin only)
+Test coverage reporting
 
-## 🎯 Goals
+🐳 Containerization
+Docker containerization
 
-This project is mainly for practice and learning:
+Docker Compose for local development
 
-Mastering TypeORM with PostgreSQL
+Kubernetes deployment manifests
 
-Applying Domain-Driven Design in real-world scenarios
+🔄 CI/CD Pipeline
+GitHub Actions for automated testing
 
-Building secure, scalable, and clean REST APIs
+Automated deployment pipelines
 
-Practicing process management with PM2 in development
+Quality gates and security scanning
 
-### 🔮 Future Improvements
+📈 Monitoring & Observability
+Winston logging integration
 
-### 🧪 Automated Tests → Add unit and integration tests (e.g., with Jest or Mocha/Chai)
+Performance monitoring
 
-### 🐳 Dockerization → Containerize the API and database for easier deployment
+Health check endpoints
 
-### 🔄 CI/CD Pipeline → Configure GitHub Actions or GitLab CI for automated builds, testing, and deployment
+Metrics collection with Prometheus
 
-### 📑 API Documentation → Add Swagger/OpenAPI for interactive API docs
+🤝 Contributing
+This project is open for learning and collaboration. Feel free to:
 
-### 📈 Monitoring & Logging → Integrate tools like Winston, ELK stack, or Prometheus
+Fork the repository
 
-### 🔗 Feel free to fork, use, and give feedback!
+Submit issues and feature requests
+
+Create pull requests
+
+Share feedback and suggestions
+
+📄 License
+This project is created for educational purposes. Feel free to use it as a reference for your own projects.
+
+Built with ❤️ using Node.js, Express, TypeScript, PostgreSQL, and Domain-Driven Design principles.
+
+Perfect for developers transitioning to enterprise-level backend development or looking to implement DDD in their Node.js projects.
+
+🎯 Professional Use Cases
+Learning Resource: Understand DDD implementation in Node.js
+
+Boilerplate: Quick start for enterprise projects
+
+Reference Architecture: Pattern implementation guide
+
+Portfolio Project: Demonstrates advanced backend skills
+
+Connect with me on LinkedIn for more insights on backend development and software architecture!
+
+Ready to power your next enterprise application with robust, scalable, and maintainable codebase. 🚀

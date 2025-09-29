@@ -1,7 +1,8 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
-import configuration from "../config";
+import configuration from "../../config/index.js";
+// import configuration from "../../config";
 dotenv.config();
 
 const {
