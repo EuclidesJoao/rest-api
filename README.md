@@ -1,4 +1,4 @@
-# 🚀 Enterprise-Grade RESTful API - Node.js, TypeScript & Domain-Driven Design
+# 📦 RESTful APIs – Built with Node.JS, Express.JS, Postgres, PM2, JWT, BCrypt, TypeORM, Swagger, and DDD (Domain Driven Design) aproach
 
 A production-ready RESTful API built with Node.js, Express, TypeScript, and PostgreSQL, following Domain-Driven Design (DDD) principles. This project demonstrates modern backend development practices with enterprise-level architecture, security, and scalability.
 
