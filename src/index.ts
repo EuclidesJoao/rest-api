@@ -12,6 +12,6 @@ AppDataSource.initialize().then(async () => {
     const docsUrl = `http://localhost:${port}/api-docs`;
     console.log(`🚀 Server is running on port: ${port}`);
     console.log(`📖 API Docs available at: ${docsUrl}`);
-    //open(docsUrl);
+    // open(docsUrl);
   });
 });

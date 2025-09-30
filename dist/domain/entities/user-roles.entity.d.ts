@@ -1,4 +1,4 @@
-export declare class UserRole {
+export declare class UserRoleEntity {
     id: number;
     designation: string;
     description: string;

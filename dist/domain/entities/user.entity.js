@@ -44,7 +44,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_roles_entity_1.UserRole, type => type.id),
+    (0, typeorm_1.ManyToOne)(() => user_roles_entity_1.UserRoleEntity, type => type.id),
     (0, typeorm_1.JoinColumn)({ name: 'fkUserRole' }),
     __metadata("design:type", Number)
 ], User.prototype, "fkUserRole", void 0);

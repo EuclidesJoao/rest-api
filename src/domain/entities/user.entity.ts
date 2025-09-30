@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
-import { UserRole } from "./user-roles.entity";
+import { UserRoleEntity } from "./user-roles.entity";
 
 @Entity()
 export class User {
@@ -24,7 +24,7 @@ export class User {
   @Column({type: 'varchar'})
   password: string
 
-  @ManyToOne(()=>UserRole, type=>type.id)
+  @ManyToOne(()=>UserRoleEntity, type=>type.id)
   @JoinColumn({name: 'fkUserRole'})
   fkUserRole: number
 }
