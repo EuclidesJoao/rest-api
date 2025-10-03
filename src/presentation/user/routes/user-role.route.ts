@@ -169,6 +169,17 @@
  *              description: Service unavailable.
  *
  */
-// import getRouterBase from "../../../base/router"
+import getRouterBase from '../../base/router';
+import { CreateUserTypeDTO } from '../controllers/dtos/create-user-type.dto';
+import { UserTypeController } from '../controllers/user-type.controller';
+import verifyUserToken from '../middlewares/verify-token';
 
-// const userRoleRouter = getRouterBase('user-roles', )
+const userTypeRouter = getRouterBase(
+  'user-types',
+  UserTypeController,
+  CreateUserTypeDTO,
+  [],
+  [verifyUserToken]
+);
+
+export default userTypeRouter;

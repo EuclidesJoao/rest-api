@@ -225,3 +225,16 @@
  *              description: Service unavailable.
  *
  */
+
+import getRouterBase from '../../base/router';
+import { UserController } from '../controllers/user.controller';
+import { CreateUserDTO } from '../controllers/dtos/create-user.dto';
+import imageUploadMiddleware  from '../../lib/middleware/image-upload';
+
+
+const upload = imageUploadMiddleware();
+const userRouter = getRouterBase('users', UserController, CreateUserDTO, [
+  upload.single('image'),
+]);
+
+export default userRouter;

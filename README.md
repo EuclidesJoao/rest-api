@@ -167,7 +167,7 @@ GET /user-roles - Manage user roles
 
 
 ### 🛠️ Available Scripts
-bash
+
 npm run watch      # Build project with watch mode
 npm run dev        # Start development server with hot reload
 npm run build      # Build for production

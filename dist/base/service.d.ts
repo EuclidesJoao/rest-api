@@ -3,6 +3,8 @@ export declare function getService<Entity extends ObjectLiteral, DTOClass extend
     new (repository: Repository<Entity>): {
         readonly repository: Repository<Entity>;
         create(data: DTOClass): Promise<import("typeorm").InsertResult>;
+        updateById(id: number, data: Partial<Entity>): Promise<import("typeorm").UpdateResult>;
+        deleteById(id: number): Promise<import("typeorm").DeleteQueryBuilder<Entity>>;
     };
 };
 //# sourceMappingURL=service.d.ts.map

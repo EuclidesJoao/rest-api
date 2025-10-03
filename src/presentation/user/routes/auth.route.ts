@@ -50,3 +50,25 @@
  *              description: Service unavailable.
  *
  */
+import { AuthController } from '../controllers/auth.controller';
+import { verifyCreateRequestBody } from '../../base/middlewares/data-submission-handler';
+import express from 'express';
+import { AuthUserDTO } from '../controllers/dtos/auth-user.dto';
+import errorHandler from '../../base/middlewares/error-handler';
+
+const authRouter = express.Router();
+
+authRouter.post(
+  '/auth',
+  verifyCreateRequestBody(AuthUserDTO),
+  (req, res, next) => {
+    AuthController.authenticate(req, res, next);
+  },
+);
+authRouter.post('/logout', (req, res, next) => {
+  AuthController.logout(req, res, next);
+});
+authRouter.use('/auth', errorHandler);
+authRouter.use('/logout', errorHandler);
+
+export default authRouter;

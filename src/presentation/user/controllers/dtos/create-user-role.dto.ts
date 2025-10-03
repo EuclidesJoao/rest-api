@@ -11,7 +11,7 @@ export class CreateUserRoleDTO{
 
     @IsString({message: "O campo descrição deve ser uma string"})
     @IsNotEmpty()
-    descricao: string
+    description: string
 
     @IsOptional()
     @IsEnum(Status, {message: "Foi fornecido um estado inválido"})
