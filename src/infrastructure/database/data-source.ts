@@ -1,23 +1,14 @@
-import "reflect-metadata";
-import { DataSource } from "typeorm";
-import dotenv from "dotenv";
-import configuration from "../../config/index.js";
-// import configuration from "../../config";
-dotenv.config();
+import dotenv from 'dotenv'
+import pg from 'pg'
 
-const {
-  database: { host, port, username, password, database },
-} = configuration;
+dotenv.config()
 
-export const AppDataSource = new DataSource({
-  type: "postgres",
-  host,
-  port,
-  username,
-  password,
-  database,
-  logging: true,
-  synchronize: true,
-  entities: [__dirname + '/../**/*.entity{.ts,.js}']
-});
+const pool = new pg.Pool({
+    user: process.env.DB_USERNAME_DEV,
+    password: process.env.DB_PASSWORD_DEV,
+    database: process.env.DB_NAME_DEV,
+    port: Number(process.env.DB_PORT_DEV),
+    host: process.env.DB_HOST_DEV
+})
 
+export default pool

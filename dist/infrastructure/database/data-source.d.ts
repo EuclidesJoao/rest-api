@@ -1,4 +1,4 @@
-import "reflect-metadata";
-import { DataSource } from "typeorm";
-export declare const AppDataSource: DataSource;
+import pg from 'pg';
+declare const pool: pg.Pool;
+export default pool;
 //# sourceMappingURL=data-source.d.ts.map

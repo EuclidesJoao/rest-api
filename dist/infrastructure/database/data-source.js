@@ -3,23 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppDataSource = void 0;
-require("reflect-metadata");
-const typeorm_1 = require("typeorm");
 const dotenv_1 = __importDefault(require("dotenv"));
-const index_js_1 = __importDefault(require("../../config/index.js"));
-// import configuration from "../../config";
+const pg_1 = __importDefault(require("pg"));
 dotenv_1.default.config();
-const { database: { host, port, username, password, database }, } = index_js_1.default;
-exports.AppDataSource = new typeorm_1.DataSource({
-    type: "postgres",
-    host,
-    port,
-    username,
-    password,
-    database,
-    logging: true,
-    synchronize: true,
-    entities: [__dirname + '/../**/*.entity{.ts,.js}']
+const pool = new pg_1.default.Pool({
+    user: process.env.DB_USERNAME_DEV,
+    password: process.env.DB_PASSWORD_DEV,
+    database: process.env.DB_NAME_DEV,
+    port: Number(process.env.DB_PORT_DEV),
+    host: process.env.DB_HOST_DEV
 });
+exports.default = pool;
 //# sourceMappingURL=data-source.js.map

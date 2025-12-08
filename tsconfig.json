@@ -2,6 +2,8 @@
   // Visit https://aka.ms/tsconfig to read more about this file
 
   "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
     "rootDir": "./src",
     "outDir": "./dist",
     "module": "CommonJS",

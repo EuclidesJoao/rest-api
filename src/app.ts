@@ -1,17 +1,16 @@
-import express from 'express';
-import cors from 'cors';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
-import swaggerModule from './config/swagger'
-import userModule from './presentation/user'
-dotenv.config();
+import swaggerUi  from 'swagger-ui-express';
+import express from 'express'
+import routes from './infrastructure/routes'
+import { swaggerSpec } from './config/swagger.config'
 
-const app = express();
+const app = express()
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(express.json());
-app.use(swaggerModule)
-app.use(userModule);
+app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api', routes)
 
-export default app;
+
+export default app
