@@ -54,13 +54,13 @@ import { User } from "../../../../shared/types/user";
  *     summary: Create a new user
  *     tags: [Users]
  *     consumes:
- *       - multipart/form-data
+ *       -  application/json:
  *     security:
  *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *          application/json:
  *           schema:
  *             $ref: '#/components/schemas/UserDTO'
  *     responses:
@@ -135,7 +135,7 @@ import { User } from "../../../../shared/types/user";
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *          application/json::
  *           schema:
  *             $ref: '#/components/schemas/UserDTO'
  *     responses:
@@ -167,9 +167,12 @@ class UserRoutes extends GenericRoute<User> {
   }
 
   protected initializeRoutes() {
-    this.router.post("/users", this.controller.create)
+    this.router.post("/", this.controller.create.bind(this.controller))
+    this.router.get("/", this.controller.findAll.bind(this.controller))
+    this.router.get("/:id", this.controller.findById.bind(this.controller))
+    this.router.delete("/:id", this.controller.delete.bind(this.controller))
+    this.router.put("/:id", this.controller.update.bind(this.controller))
   }
 }
 
-// export default userRoutesInstance.router;
 export default new UserRoutes().router;

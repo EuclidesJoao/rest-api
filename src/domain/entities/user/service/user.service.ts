@@ -9,10 +9,6 @@ class UserService extends GenericService<User>{
         const userRepository = new UserRepository();
         super(userRepository);
     }
-
-    async createUser(data: Partial<User>): Promise<User> {
-        return this.repository.create(data);
-    }
 }
 
 export default UserService;

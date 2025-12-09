@@ -19,11 +19,52 @@ class GenericService<T> {
     }
   }
 
-  async delete() {
+  async findAll(): Promise<T[]> {
     try {
-      return this.repository.delete();
+      return this.repository.findAll();
     } catch (error) {
-      throw new Error();
+      throw new Error(`
+        Service error fetching recordes: ${
+          error instanceof Error ? error.message : "Unkown error"
+        }   
+        `);
+    }
+  }
+
+  async findById(id: string): Promise<T | null> {
+    try {
+      return await this.repository.findById(id);
+    } catch (error) {
+      throw new Error(`
+        Servicer error fetching record: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }
+        `);
+    }
+  }
+
+  async delete(id: string | number): Promise<boolean> {
+    try {
+      return await this.repository.delete(id);
+    } catch (error) {
+      throw new Error(`
+        Server error deleting record: ${
+          error instanceof Error ? error.message : "Unknown Error"
+        }
+        `);
+    }
+  }
+
+  async update(id: string | number, data: Partial<T>): Promise<T | null> {
+    try {
+      console.log("THESE ARE THE VALUES BEING SENT: ", data)
+      return await this.repository.update(id, data);
+    } catch (error) {
+      throw new Error(
+        `Service error updating record: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
     }
   }
 }

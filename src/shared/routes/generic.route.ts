@@ -8,12 +8,15 @@ class GenericRoute<T> {
 
     constructor(controller: GenericController<any>) {
         this.controller = controller;
-        this.initializeRoutes(); // Crucial: Initialize routes immediately
+        this.initializeRoutes();
     }
 
     protected initializeRoutes(): void {
         this.router.post("/", this.controller.create);
-        this.router.delete("/", this.controller.delete)
+        this.router.get("/", this.controller.findAll)
+        this.router.get("/:id", this.controller.findById.bind(this.controller));
+        this.router.delete("/:id", this.controller.delete.bind(this.controller));
+        this.router.put("/:id", this.controller.update.bind(this.controller));
     }
 }
 

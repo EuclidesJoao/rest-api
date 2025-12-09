@@ -7,25 +7,10 @@ class UserRepository extends GenericRepository<User> {
   constructor() {
     const config: GenericConfig = {
       tableName: "users",
-      primaryKey: "id",
+      primaryKey: "id"
     };
     super(config);
   }
-
-  // async findByEmail(email: string): Promise<User | null> {
-  //   try {
-  //     const query = `SELECT * FROM ${this.table} WHERE email = $1`;
-  //     const result = await pool.query(query, [email]);
-  //     return result.rows[0] as User || null;
-  //   } catch (error) {
-  //     console.error(`Error finding user by email:`, error);
-  //     throw new Error(
-  //       `Failed to find user by email: ${
-  //         error instanceof Error ? error.message : "Unknown error"
-  //       }`
-  //     );
-  //   }
-  // }
 }
 
 export default UserRepository;
