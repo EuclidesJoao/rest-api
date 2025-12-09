@@ -1,4 +1,3 @@
-import { Request, Response, NextFunction } from "express";
 import { User } from "../../../../shared/types/user";
 import UserService from "../service/user.service";
 import GenericController from "../../../../shared/controller/generic.controller";

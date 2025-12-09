@@ -21,25 +21,28 @@ import { User } from "../../../../shared/types/user";
  *     User:
  *       type: object
  *       required:
- *         - firstName
- *         - lastName
+ *         - first_name
+ *         - last_name
  *         - email
+ *         - password 
  *       properties:
  *         id:
  *           type: number
- *         firstname:
+ *         first_name:
  *           type: string
- *         lastname:
+ *         last_name:
  *           type: string
  *         email:
+ *           type: string
+ *         password: 
  *           type: string
  *
  *     UserDTO:
  *       type: object
  *       properties:
- *         firstname:
+ *         first_name:
  *           type: string
- *         lastname:
+ *         last_name:
  *           type: string
  *         email:
  *           type: string
@@ -135,12 +138,14 @@ import { User } from "../../../../shared/types/user";
  *     requestBody:
  *       required: true
  *       content:
- *          application/json::
+ *          application/json:
  *           schema:
  *             $ref: '#/components/schemas/UserDTO'
  *     responses:
  *       200:
  *         description: Updated successfully
+ *       404:
+ *         description: User not found
  *
  *   delete:
  *     summary: Delete a user

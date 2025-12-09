@@ -80,19 +80,22 @@ class GenericController<T> {
     try {
       const id = req.params.id;
       const data = req.body;
-      
+
       if (typeof id !== "string") {
-        res.status(400).json({ message: "ID parameter is required" });;
+        res.status(400).json({ message: "ID parameter is required" });
         return;
       }
-      
+
+      console.log("THE ID OF RECORD BEING UPDATED: ", id);
+      console.log("DATAS BEING UPDATED: ", data);
+
       const result = await this.service.update(id, data);
-      
+
       if (!result) {
         res.status(404).json({ message: "Record not found" });
         return;
       }
-      
+
       res.status(200).json(result);
     } catch (error) {
       next(error);

@@ -66,6 +66,8 @@ class GenericRepository<T> {
     }
   }
 
+
+
   async delete(id: string | number): Promise<boolean> {
     try {
       const query = `
@@ -84,35 +86,32 @@ class GenericRepository<T> {
     }
   }
 
-  // File: generic.repository.ts
-
-  async update(id: string | number, data: Partial<T>): Promise<T | null> {
+  async update(id: string, data: Partial<T>): Promise<T> {
     try {
-      // 1. Check if data has any keys (to prevent updating nothing)
       const keys = Object.keys(data);
+
       if (keys.length === 0) {
-        return this.findById(String(id)); // Or handle as a no-op update
+        throw new Error("No fields provided for update");
       }
 
-      const values = Object.values(data); // Create SET clause, placeholders start from $1
-      const setClause = keys
-        .map((key, index) => `${key} = $${index + 1}`)
-        .join(", "); // Calculate the placeholder index for the ID. // It's the length of the values array + 1 (since array is 0-indexed, and placeholders are 1-indexed)
-      const idPlaceholder = keys.length + 1;
-      const query = `
-        UPDATE ${this.table} 
-        SET ${setClause} 
-        WHERE ${this.primaryKey} = $${idPlaceholder} 
-        RETURNING *
-      `; // Combine update values and the ID for the query parameters
-      const response = await pool.query(query, [...values, id]);
+      const setQuery = keys
+        .map((key, index) => `"${key}" = $${index + 1}`)
+        .join(", ");
 
-      return (response.rows[0] as T) || null;
-    } catch (error) {
-      throw new Error(`
-        Failed to update record: ${
-        error instanceof Error ? error.message : "Unknown Error"
-      }`);
+      const values = Object.values(data);
+
+      const query = `
+      UPDATE ${this.table}
+      SET ${setQuery}
+      WHERE id = $${keys.length + 1}
+      RETURNING *;
+    `;
+
+      const result = await pool.query(query, [...values, id]);
+
+      return result.rows[0];
+    } catch (error: any) {
+      throw new Error(`Failed to update record: ${error.message}`);
     }
   }
 }

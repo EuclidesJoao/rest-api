@@ -55,7 +55,7 @@ class GenericService<T> {
     }
   }
 
-  async update(id: string | number, data: Partial<T>): Promise<T | null> {
+  async update(id: string, data: Partial<T>): Promise<T | null> {
     try {
       console.log("THESE ARE THE VALUES BEING SENT: ", data)
       return await this.repository.update(id, data);
