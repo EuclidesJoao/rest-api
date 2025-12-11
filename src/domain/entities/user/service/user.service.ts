@@ -42,7 +42,12 @@ class UserService extends GenericService<User> {
       };
 
       return await this.repository.create(userToCreate);
-    } catch (error) {}
+    } catch (error) {
+      throw new Error(`
+        Service error creating record: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`)
+    }
   }
 }
 

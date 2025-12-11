@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import GenericService from "../services/generic.service";
-import { string } from "zod";
 
 class GenericController<T> {
   protected service: GenericService<T>;

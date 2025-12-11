@@ -1,14 +1,13 @@
 import GenericRoute from "../../../../shared/routes/generic.route";
-import UserController from "../controllers/user.controller";
-import { User } from "../../../../shared/types/user";
+import { UserRole } from "../../../../shared/types/user";
+import UserRoleController from "../controllers/user-role.controller";
 
 /**
  * @swagger
  * tags:
- *   name: Users
- *   description: User management endpoints
+ *   name: User-Roles
+ *   description: User roles management endpoints
  */
-
 /**
  * @swagger
  * components:
@@ -19,49 +18,29 @@ import { User } from "../../../../shared/types/user";
  *       bearerFormat: JWT
  *
  *   schemas:
- *     User:
+ *     User-roles:
  *       type: object
  *       required:
- *         - first_name
- *         - last_name
- *         - fk_role
- *         - email
- *         - password 
+ *         - designation 
  *       properties:
  *         id:
  *           type: number
- *         first_name:
- *           type: string
- *         last_name:
- *           type: string
- *         fk_role:
- *           type: number
- *         email:
- *           type: string
- *         password: 
+ *         designation:
  *           type: string
  *
- *     UserDTO:
+ *     UserRoleDTO:
  *       type: object
  *       properties:
- *         first_name:
- *           type: string
- *         last_name:
- *           type: string
- *         fk_role:
- *           type: number
- *         email:
- *           type: string
- *         password:
+ *         designation:
  *           type: string
  */
 
 /**
  * @swagger
- * /api/users:
+ * /api/user-roles:
  *   post:
- *     summary: Create a new user
- *     tags: [Users]
+ *     summary: Create a new user role
+ *     tags: [User-Roles]
  *     consumes:
  *       -  application/json:
  *     security:
@@ -71,20 +50,20 @@ import { User } from "../../../../shared/types/user";
  *       content:
  *          application/json:
  *           schema:
- *             $ref: '#/components/schemas/UserDTO'
+ *             $ref: '#/components/schemas/UserRoleDTO'
  *     responses:
  *       201:
- *         description: User successfully created
+ *         description: User role successfully created
  *       400:
  *         description: Already exists
  *       404:
- *         description: User type not found
+ *         description: User role type not found
  *       500:
  *         description: Service unavailable
  *
  *   get:
- *     summary: Get all users
- *     tags: [Users]
+ *     summary: Get all user roles
+ *     tags: [User-Roles]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -110,12 +89,13 @@ import { User } from "../../../../shared/types/user";
  *         description: Service unavailable
  */
 
+
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/user-roles/{id}:
  *   get:
  *     summary: Get a user by ID
- *     tags: [Users]
+ *     tags: [User-Roles]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -126,13 +106,13 @@ import { User } from "../../../../shared/types/user";
  *           type: number
  *     responses:
  *       200:
- *         description: User found
+ *         description: User role found
  *       404:
- *         description: User not found
+ *         description: User role not found
  *
  *   put:
- *     summary: Update a user
- *     tags: [Users]
+ *     summary: Update a user role
+ *     tags: [User-Roles]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -146,7 +126,7 @@ import { User } from "../../../../shared/types/user";
  *       content:
  *          application/json:
  *           schema:
- *             $ref: '#/components/schemas/UserDTO'
+ *             $ref: '#/components/schemas/UserRoleDTO'
  *     responses:
  *       200:
  *         description: Updated successfully
@@ -155,7 +135,7 @@ import { User } from "../../../../shared/types/user";
  *
  *   delete:
  *     summary: Delete a user
- *     tags: [Users]
+ *     tags: [User-Roles]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -171,20 +151,16 @@ import { User } from "../../../../shared/types/user";
  *         description: User not found
  */
 
-class UserRoutes extends GenericRoute<User> {
+class UserRoleRoute extends GenericRoute<UserRole> {
   constructor() {
-    const controller = new UserController()
-    super(controller);
-    this.initializeRoutes();
+    super(UserRoleController);
+    this.initializeRoutes()
   }
 
-  protected initializeRoutes() {
-    this.router.post("/", (this.controller as UserController).createUser.bind(this.controller))
-    this.router.get("/", this.controller.findAll.bind(this.controller))
-    this.router.get("/:id", this.controller.findById.bind(this.controller))
-    this.router.delete("/:id", this.controller.delete.bind(this.controller))
-    this.router.put("/:id", this.controller.update.bind(this.controller))
+  protected initializeRoutes(): void {
+    this.router.post("/", this.controller.create.bind(this.controller));
+    this.router.get("/", this.controller.findAll.bind(this.controller));
   }
 }
 
-export default new UserRoutes().router;
+export default new UserRoleRoute().router;

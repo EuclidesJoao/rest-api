@@ -9,3 +9,10 @@ export type User = {
   created_at?: Date;
   updated_at?: Date;
 };
+
+export type UserRole = {
+  id?: number;
+  designation: string;
+  created_at?: Date;
+  updated_at?: Date;
+}

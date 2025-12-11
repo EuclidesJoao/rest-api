@@ -66,8 +66,6 @@ class GenericRepository<T> {
     }
   }
 
-
-
   async delete(id: string | number): Promise<boolean> {
     try {
       const query = `
